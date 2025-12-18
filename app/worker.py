@@ -18,6 +18,7 @@ from app.ollama import call_ollama
 async def process_job():
     """백그라운드 워커 - 큐에서 job을 꺼내 처리"""
     print("🔄 워커 시작됨")
+    
     while True:
         job_id = None
         try:

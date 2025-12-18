@@ -41,6 +41,7 @@ class JobRequest(BaseModel):
     events: Optional[List[Event]] = None
 
 
+
 @app.post("/jobs")
 async def create_job(request: JobRequest):
     # 고유 ID 생성
@@ -60,6 +61,7 @@ async def create_job(request: JobRequest):
         "job_id": job_id,
         "status": "PENDING"
     }
+
 
 
 @app.get("/jobs/{job_id}")

@@ -27,7 +27,7 @@ TIMEOUT = float(os.getenv("TIMEOUT", "120.0"))
 # 프롬프트 설정
 SYSTEMPT = "xml_prompt_system.txt"
 USERPT = "xml_prompt_user.txt"
-SLLMPT = "sllm_prompt.txt"
+SLLMPT = "sllm_prompt copy.txt"
 
 
 

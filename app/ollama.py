@@ -48,7 +48,8 @@ async def call_ollama(job_data: dict) -> str:
                 "model": MODEL_NAME,      # 사용할 AI 모델 이름 (예: llama3)
                 "prompt": prompt,         # 위에서 만든 프롬프트
                 "stream": False,          # 스트리밍 안함 (전체 응답 한번에 받기)
-                "options": OLLAMA_OPTIONS # config.json의 옵션 (temperature 등)
+                "options": OLLAMA_OPTIONS, # config.json의 옵션 (temperature 등)
+                "keep_alive": -1          # 모델을 메모리에 계속 유지 (로딩 시간 제거)
             },
             # 대기 (config.py에서 수정)
             timeout=TIMEOUT
