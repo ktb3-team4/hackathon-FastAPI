@@ -27,7 +27,7 @@ jobs:
         run: |
           docker buildx build \
             --platform linux/amd64 \
-            -t wonseoop/hackton-FaseAPI:1.0.0 \
+            -t wonseoop/hackton-FastAPI:1.0.0 \
             --push .
 
   deploy:
