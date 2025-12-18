@@ -64,6 +64,5 @@ jobs:
         run: |
           for IP in $BE_IPS; do
             ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ubuntu@$IP \
-              "cd /home/ubuntu/AWS_DOCKER/be && docker compose down && docker compose pull && docker compose up -d"
+              "cd /home/ubuntu/AWS_DOCKER/FastAPI && docker compose down && docker compose pull && docker compose up -d"
           done
-
