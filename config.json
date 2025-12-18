@@ -1,6 +1,6 @@
 {
     "num_predict": 80,
-    "temperature": 0.3,
+    "temperature": 0.5,
     "top_p": 0.85,
     "top_k": 40,
     "repeat_penalty": 1.4,

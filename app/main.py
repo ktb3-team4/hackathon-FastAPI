@@ -17,6 +17,7 @@ import asyncio
 from app.store import store
 from app.queue import job_queue
 from app.worker import process_job
+from app import config
 
 
 app = FastAPI(root_path="/fastapi")
@@ -40,6 +41,10 @@ class JobRequest(BaseModel):
     interests: Optional[str] = None
     events: Optional[List[Event]] = None
     chatContent: Optional[str] = None
+
+
+class ModelChangeRequest(BaseModel):
+    model_name: str
 
 
 
@@ -88,6 +93,17 @@ async def get_job_result(job_id: str):
         "status": job["status"],
         "result": job.get("result")
     }
+
+
+@app.post("/model")
+async def change_model(request: ModelChangeRequest):
+    config.MODEL_NAME = request.model_name
+    return {"model_name": config.MODEL_NAME}
+
+
+@app.get("/model")
+async def get_model():
+    return {"model_name": config.MODEL_NAME}
 
 
 @app.on_event("startup")
