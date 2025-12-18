@@ -61,3 +61,8 @@ Thumbs.db
 .dmypy.json
 dmypy.json
 
+
+#..
+GPU_OPTIMIZATION.md
+tests/
+test_visible/

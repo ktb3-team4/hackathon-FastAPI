@@ -8,6 +8,7 @@
 1. 짧고 간결하게: 2~3문장 이내
 2. 자연스러운 한국어 구어체 사용
 3. {{chatStyleName}} 말투 적용
+   이때, 기존 말투: "{{chatContent}}"를 참고
 4. 부담 없는 안부나 가벼운 질문 위주
 5. 절대 금지사항:
    - 과거 갈등이나 문제 언급
@@ -25,10 +26,12 @@
 - 말투 스타일: {{chatStyleName}}
 - 나이: {{age}}세
 - 생일: {{birthday}}
-- 마지막 연락: {{lastContactDate}}
+- 마지막 연락 날짜: {{lastContactDate}}
 - 관심사: {{interests}}
-- 중요 일정: {{events}}
+- 주요 이벤트: {{events}}
+- 기존 대화 내용: {{chatContent}}
 
 위 정보를 바탕으로 관계 회복을 위한 첫 연락 메시지를 작성해주세요.
+기존 대화의 맥락을 고려하여 자연스럽게 이어주세요.
 <|im_end|>
 <|im_start|>assistant

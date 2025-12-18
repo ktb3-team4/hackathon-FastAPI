@@ -8,7 +8,7 @@ XML 프롬프트 템플릿 파일에 사용자 데이터를 삽입하여 완성�
 import sys
 from pathlib import Path
 from typing import Dict
-from app.config import USERPT, SYSTEMPT, SLLMPT
+from app.config import USERPT, SYSTEMPT, SLLMPT, MLLMPT
 
 
 
@@ -33,6 +33,7 @@ def build_prompt(data: Dict) -> Dict[str, str]:
         last_contact_date: 마지막 연락일 (선택)
         interests: 관심사 및 취미 (선택)
         events: 최근 이벤트 목록 (선택)
+        chatContent: 기존 대화 기록 (선택)
 
     Returns:
         Dict[str, str]: {"system": 시스템 프롬프트, "user": 유저 프롬프트}
@@ -46,6 +47,8 @@ def build_prompt(data: Dict) -> Dict[str, str]:
     last_contact_date = data.get("lastContactDate")
     interests = data.get("interests")
     events = data.get("events")
+    chat_content = data.get("chatContent")
+
 
 
     # 프롬프트 파일 경로 설정
@@ -125,10 +128,11 @@ def build_prompt_sllm(data: Dict) -> str:
     last_contact_date = data.get("lastContactDate")
     interests = data.get("interests")
     events = data.get("events")
+    chat_content = data.get("chatContent")
 
     # 프롬프트 파일 경로 설정
     base_path = Path(__file__).parent.parent / "prompts"
-    prompt_path = base_path / SLLMPT
+    prompt_path = base_path / MLLMPT
 
     # 프롬프트 파일 읽기
     with open(prompt_path, "r", encoding="utf-8") as f:
@@ -144,6 +148,7 @@ def build_prompt_sllm(data: Dict) -> str:
         "{{birthday}}": birthday if birthday else "정보 없음",
         "{{lastContactDate}}": last_contact_date if last_contact_date else "정보 없음",
         "{{interests}}": interests if interests else "정보 없음",
+        "{{chatContent}}": chat_content if chat_content else "정보 없음",
     }
 
     # events 포맷팅

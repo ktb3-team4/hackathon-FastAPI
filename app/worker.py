@@ -41,5 +41,7 @@ async def process_job():
                 print(f"❌ 오류 발생: {job_id} - {e}")
                 store[job_id]["status"] = "ERROR"
                 store[job_id]["result"] = str(e)
+            
+            
 
         await asyncio.sleep(0.1)

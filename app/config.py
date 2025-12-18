@@ -16,7 +16,7 @@ load_dotenv()
 
 # 환경변수
 PORT = os.getenv("PORT", 8000)
-MODEL_NAME = os.getenv("MODEL_NAME", "llama3")
+MODEL_NAME = os.getenv("MODEL_NAME", "llama2:13b")
 OLLAMA_URL = os.getenv("OLLAMA_URL", "http://localhost:11434/api/generate")
 TIMEOUT = float(os.getenv("TIMEOUT", "120.0"))
 
@@ -28,7 +28,7 @@ TIMEOUT = float(os.getenv("TIMEOUT", "120.0"))
 SYSTEMPT = "xml_prompt_system.txt"
 USERPT = "xml_prompt_user.txt"
 SLLMPT = "sllm_prompt copy.txt"
-
+MLLMPT = "mllm_prompt.txt"
 
 
 # config.json 로드

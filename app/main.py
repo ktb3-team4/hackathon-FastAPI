@@ -39,6 +39,7 @@ class JobRequest(BaseModel):
     lastContactDate: Optional[str] = None
     interests: Optional[str] = None
     events: Optional[List[Event]] = None
+    chatContent: Optional[str] = None
 
 
 
@@ -82,11 +83,17 @@ async def get_job_result(job_id: str):
     if not job:
         return {"error": "Job not found"}
 
-    return {
+    result = {
         "job_id": job_id,
         "status": job["status"],
         "result": job.get("result")
     }
+
+    # 결과 반환 후 즉시 삭제 (메모리 누수 방지)
+    if job["status"] in ["DONE", "ERROR"]:
+        del store[job_id]
+
+    return result
 
 
 @app.on_event("startup")

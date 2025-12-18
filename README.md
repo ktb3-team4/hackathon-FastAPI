@@ -32,19 +32,20 @@
 input:
 ```json
 {
-  "name": "string (필수)",
-  "relationName": "string (필수)",
-  "chatStyleName": "string (필수)",
+  "name": "홍길동",
+  "relationName": "엄마",
+  "chatStyleName": "편한 반말",
   "age": 25,
-  "birthday": "string (선택)",
-  "lastContactDate": "string (선택)",
-  "interests": "string (선택)",
+  "birthday": "1999-12-17",
+  "lastContactDate": "2025-12-15",
+  "interests": "축구, 영화 감상, 맛집 탐방",
   "events": [
     {
-      "date": "string (선택)",
-      "description": "string (선택)"
+      "date": "2025-01-10",
+      "description": "결혼기념일"
     }
-  ]
+  ],
+  "chatContent": "ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ  \n휴학하라고 하실거 같은데  \n고민했던 것들이나 궁금했던 것들  \n적어가봐  "
 }
 ```
 
@@ -91,20 +92,21 @@ output:
 curl -X POST "http://localhost:8000/fastapi/jobs" \
   -H "Content-Type: application/json" \
   -d '{
-    "name": "홍길동",
-    "relationName": "엄마",
-    "chatStyleName": "편한 반말",
-    "age": 25,
-    "birthday": "1999-12-17",
-    "lastContactDate": "2025-12-15",
-    "interests": "축구, 영화 감상, 맛집 탐방",
-    "events": [
-      {
-        "date": "2025-01-10",
-        "description": "결혼기념일"
-      }
-    ]
-  }'
+  "name": "홍길동",
+  "relationName": "엄마",
+  "chatStyleName": "편한 반말",
+  "age": 25,
+  "birthday": "1999-12-17",
+  "lastContactDate": "2025-12-15",
+  "interests": "축구, 영화 감상, 맛집 탐방",
+  "events": [
+    {
+      "date": "2025-01-10",
+      "description": "결혼기념일"
+    }
+  ],
+  "chatContent": "ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ  \n휴학하라고 하실거 같은데  \n고민했던 것들이나 궁금했던 것들  \n적어가봐  "
+}'
 ```
 
 

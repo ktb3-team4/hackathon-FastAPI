@@ -21,10 +21,11 @@
 말투: {{chatStyleName}}
 나이: {{age}}
 생일: {{birthday}}
-마지막 연락 시점/상황: {{lastContactDate}}
+마지막 연락 날짜: {{lastContactDate}}
 관심사: {{interests}}
-최근 이벤트: {{events}}
+주요 이벤트: {{events}}
+기존 대화 내용: {{chatContent}}
 
 요청:
 위 정보를 종합해 관계 회복의 첫 연락으로 적절한 문장을 생성하세요.
-서두는 관계와 말투에 맞게 자연스럽게 시작하세요.
+서두는 관계와 말투에 맞게 자연스럽게 시작하고, 기존 대화의 맥락을 고려하세요.

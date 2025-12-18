@@ -54,7 +54,7 @@ echo -e "\n${YELLOW}[2/6] Ollama 서비스 확인 중...${NC}"
 
 if ! pgrep -x "ollama" > /dev/null; then
     echo -e "${YELLOW}Ollama 서비스 시작 중...${NC}"
-    ollama serve &
+    CUDA_VISIBLE_DEVICES=0 ollama serve &
     OLLAMA_PID=$!
     sleep 3
     echo -e "${GREEN}✓ Ollama 서비스 시작됨 (PID: $OLLAMA_PID)${NC}"
@@ -123,7 +123,7 @@ if [ "$ENV" = "development" ]; then
     echo -e "${YELLOW}종료하려면 Ctrl+C를 누르세요${NC}\n"
     uvicorn app.main:app --host 0.0.0.0 --port ${PORT} --reload
 else
-    echo -e "${GREEN}[배포 모드] 4개 워커로 안정적 실행${NC}"
+    echo -e "${GREEN}[배포 모드] --reload 비활성화${NC}"
     echo -e "${YELLOW}종료하려면 Ctrl+C를 누르세요${NC}\n"
-    uvicorn app.main:app --host 0.0.0.0 --port ${PORT} --workers 4
+    uvicorn app.main:app --host 0.0.0.0 --port ${PORT}
 fi
