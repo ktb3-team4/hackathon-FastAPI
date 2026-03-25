@@ -1,4 +1,6 @@
 #!/bin/bash
+set -e
+set -o pipefail
 
 # 색상 정의
 GREEN='\033[0;32m'
@@ -6,9 +8,8 @@ YELLOW='\033[1;33m'
 RED='\033[0;31m'
 NC='\033[0m' # No Color
 
-
-
 echo -e "${GREEN}=== Ollama 서버 및 앱 시작 스크립트 ===${NC}\n"
+
 
 
 
@@ -26,6 +27,7 @@ fi
 
 
 
+
 # 1. Ollama 설치 확인
 echo -e "\n${YELLOW}[1/6] Ollama 설치 확인 중...${NC}"
 
@@ -33,15 +35,25 @@ if ! command -v ollama &> /dev/null; then
     echo -e "${RED}✗ Ollama가 설치되어 있지 않습니다${NC}"
     echo -e "${YELLOW}Ollama 설치 중...${NC}"
 
+    if ! command -v curl &> /dev/null; then
+        echo -e "${RED}✗ curl이 설치되어 있지 않습니다${NC}"
+        echo -e "${YELLOW}sudo apt update && sudo apt install -y curl${NC}"
+        exit 1
+    fi
 
-    # Linux용 Ollama 설치
-    if [[ "$OSTYPE" == "darwin"* ]]; then
-        curl -fsSL https://ollama.com/install.sh | sh
-    else
-        echo -e "${RED}현재 OS는 자동 설치를 지원하지 않습니다${NC}"
+    set -o pipefail
+    if ! curl -fsSL https://ollama.com/install.sh | sh; then
+        echo -e "${RED}현재 OS 또는 환경에서는 Ollama 자동 설치를 지원하지 않습니다${NC}"
         echo -e "${YELLOW}https://ollama.com 에서 수동으로 설치해주세요${NC}"
         exit 1
     fi
+
+    if ! command -v ollama &> /dev/null; then
+        echo -e "${RED}✗ Ollama 설치 후 실행 파일을 찾을 수 없습니다${NC}"
+        exit 1
+    fi
+
+    echo -e "${GREEN}✓ Ollama 설치 완료${NC}"
 else
     echo -e "${GREEN}✓ Ollama가 이미 설치되어 있습니다${NC}"
 fi
@@ -49,15 +61,24 @@ fi
 
 
 
+
 # 2. Ollama 서비스 실행 확인
 echo -e "\n${YELLOW}[2/6] Ollama 서비스 확인 중...${NC}"
 
-if ! pgrep -x "ollama" > /dev/null; then
+if ! pgrep -x ollama > /dev/null; then
     echo -e "${YELLOW}Ollama 서비스 시작 중...${NC}"
-    CUDA_VISIBLE_DEVICES=0 ollama serve &
-    OLLAMA_PID=$!
+
+    CUDA_VISIBLE_DEVICES=${CUDA_VISIBLE_DEVICES:-0} \
+    nohup ollama serve > ollama.log 2>&1 &
+
     sleep 3
-    echo -e "${GREEN}✓ Ollama 서비스 시작됨 (PID: $OLLAMA_PID)${NC}"
+
+    if pgrep -x ollama > /dev/null; then
+        echo -e "${GREEN}✓ Ollama 서비스 시작됨${NC}"
+    else
+        echo -e "${RED}✗ Ollama 서비스 시작 실패${NC}"
+        exit 1
+    fi
 else
     echo -e "${GREEN}✓ Ollama 서비스가 이미 실행 중입니다${NC}"
 fi
@@ -69,17 +90,19 @@ fi
 echo -e "\n${YELLOW}[3/6] Ollama 서버 응답 확인 중...${NC}"
 
 for i in {1..10}; do
-    if curl -s http://localhost:11434/api/tags > /dev/null 2>&1; then
+    if curl -s http://localhost:11434/api/tags > /dev/null; then
         echo -e "${GREEN}✓ Ollama 서버가 정상 응답합니다${NC}"
         break
     fi
-    if [ $i -eq 10 ]; then
+    if [ "$i" -eq 10 ]; then
         echo -e "${RED}✗ Ollama 서버 응답 시간 초과${NC}"
         exit 1
     fi
     echo -e "${YELLOW}대기 중... ($i/10)${NC}"
-    sleep 2
+    sleep 3
 done
+
+
 
 
 
@@ -98,6 +121,7 @@ fi
 
 
 
+
 # 5. Python 의존성 확인
 echo -e "\n${YELLOW}[5/6] Python 의존성 확인 중...${NC}"
 
@@ -107,6 +131,7 @@ if [ -f requirements.txt ]; then
 else
     echo -e "${YELLOW}! requirements.txt 파일이 없습니다${NC}"
 fi
+
 
 
 

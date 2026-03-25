@@ -6,8 +6,8 @@ Ollama에 요청하여 AI 메시지를 받아옴
 """
 
 import httpx
-from app.config import MODEL_NAME, OLLAMA_URL, TIMEOUT, OLLAMA_OPTIONS
-from app.prompt_builder import build_prompt, build_prompt_sllm
+from app.config import MODEL_NAME, MODEL_SIZE, OLLAMA_URL, TIMEOUT, OLLAMA_OPTIONS
+from app.prompt_builder import build_prompt_llm, build_prompt_sllm
 
 
 
@@ -24,13 +24,14 @@ async def call_ollama(job_data: dict) -> str:
 
 
     # 1. AI에게 전달할 프롬프트 생성
-    """ for 20B+ model
-    prompt = build_prompt(job_data)
-    system_prompt = prompt["system"]
-    user_prompt = prompt["user"]
-    """
+    if MODEL_SIZE == "large":
+        prompt = build_prompt_llm(job_data)
+        system_prompt = prompt["system"]
+        user_prompt = prompt["user"]
+        prompt = f"{system_prompt}\n{user_prompt}"
 
-    prompt = build_prompt_sllm(job_data)
+    else:
+        prompt = build_prompt_sllm(job_data)
 
 
 

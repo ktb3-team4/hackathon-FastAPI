@@ -1,0 +1,163 @@
+당신은 인간관계를 섬세하게 이해하는 대화 생성 AI입니다.
+아래 JSON 템플릿의 빈 값을 자연스럽고 현실적으로 채워주세요.
+
+규칙:
+1. 출력은 반드시 JSON 형식만 사용하세요.
+2. key 구조는 절대 변경하지 마세요.
+3. chatContent는 가장 중요하며, 반드시 chatStyleName의 말투 특성을 강하게 반영해야 합니다.
+4. Optional 필드(None)는 맥락상 자연스럽다면 채워도 되고, 불필요하면 null로 유지해도 됩니다.
+5. chatContent는 실제 사람이 보낸 메시지처럼 자연스러워야 합니다.
+6. relationName은 {'아빠', '할머니', '엄마', '할아버지'} 중 하나를 선택합니다.
+
+템플릿 설명:
+{
+  "name": "상대의 이름",
+  "relationName": "상대와의 관계",
+  "chatStyleName": "상대와 대화 시 내가 사용하는 말투",
+  "age": "상대의 나이(int)",
+  "birthday": "상대의 생일 (yyyy-mm-dd)",
+  "lastContactDate": "yyyy-mm-dd (상대와 마지막으로 연락한 날짜)",
+  "interests": "상대의 취미나 관심사",
+  "events": [
+    {
+      "date": "기념일 날짜 (yyyy-mm-dd)",
+      "description": "기념일 종류"
+    }
+  ],
+  "chatContent": "실제 연락/대화 내용 기록 (내가 보낸 채팅 내용)"
+}
+
+
+chatStyleName 설명:
+{
+  "편한 반말": "일상적이고 거리감 없는 말투",
+  "존댓말": "무난하고 예의 중심의 말투",
+  "애교 섞인 말투": "감정 표현이 많고 친근함을 강조하는 말투",
+  "걱정·배려 중심 말투": "상대 상태를 먼저 살피는 말투"
+}
+
+채워야 할 JSON 템플릿:
+
+[
+
+{
+  "name": "",
+  "relationName": "",
+  "chatStyleName": "애교 섞인 말투",
+  "age": null,
+  "birthday": null,
+  "lastContactDate": null,
+  "interests": null,
+  "events": null,
+  "chatContent": null
+},
+
+{
+  "name": "",
+  "relationName": "",
+  "chatStyleName": "걱정·배려 중심 말투",
+  "age": null,
+  "birthday": null,
+  "lastContactDate": null,
+  "interests": null,
+  "events": null,
+  "chatContent": null
+},
+
+{
+  "name": "",
+  "relationName": "",
+  "chatStyleName": "존댓말",
+  "age": null,
+  "birthday": null,
+  "lastContactDate": null,
+  "interests": null,
+  "events": null,
+  "chatContent": null
+},
+
+{
+  "name": "",
+  "relationName": "",
+  "chatStyleName": "걱정·배려 중심 말투",
+  "age": null,
+  "birthday": null,
+  "lastContactDate": null,
+  "interests": null,
+  "events": null,
+  "chatContent": null
+},
+
+{
+  "name": "",
+  "relationName": "",
+  "chatStyleName": "편한 반말",
+  "age": null,
+  "birthday": null,
+  "lastContactDate": null,
+  "interests": null,
+  "events": null,
+  "chatContent": null
+},
+
+{
+  "name": "",
+  "relationName": "",
+  "chatStyleName": "존댓말",
+  "age": null,
+  "birthday": null,
+  "lastContactDate": null,
+  "interests": null,
+  "events": null,
+  "chatContent": null
+},
+
+{
+  "name": "",
+  "relationName": "",
+  "chatStyleName": "걱정·배려 중심 말투",
+  "age": null,
+  "birthday": null,
+  "lastContactDate": null,
+  "interests": null,
+  "events": null,
+  "chatContent": null
+},
+
+{
+  "name": "",
+  "relationName": "",
+  "chatStyleName": "편한 반말",
+  "age": null,
+  "birthday": null,
+  "lastContactDate": null,
+  "interests": null,
+  "events": null,
+  "chatContent": null
+},
+
+{
+  "name": "",
+  "relationName": "",
+  "chatStyleName": "애교 섞인 말투",
+  "age": null,
+  "birthday": null,
+  "lastContactDate": null,
+  "interests": null,
+  "events": null,
+  "chatContent": null
+},
+
+{
+  "name": "",
+  "relationName": "",
+  "chatStyleName": "존댓말",
+  "age": null,
+  "birthday": null,
+  "lastContactDate": null,
+  "interests": null,
+  "events": null,
+  "chatContent": null
+},
+
+]

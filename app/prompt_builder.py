@@ -1,14 +1,13 @@
 # app/prompt_builder.py
 """
 프롬프트 생성 함수 모듈
-
-XML 프롬프트 템플릿 파일에 사용자 데이터를 삽입하여 완성된 프롬프트를 생성합니다.
+프롬프트 템플릿 파일에 사용자 데이터를 삽입하여 완성된 프롬프트를 생성합니다.
 """
 
 import sys
 from pathlib import Path
 from typing import Dict
-from app.config import USERPT, SYSTEMPT, SLLMPT, MLLMPT
+from app.config import PROMT_U, PROMT_S
 
 
 
@@ -20,7 +19,9 @@ if __name__ == "__main__":
 
 
 
-def build_prompt(data: Dict) -> Dict[str, str]:
+
+
+def build_prompt_llm(data: Dict) -> Dict[str, str]:
     """
     프롬프트 템플릿에 사용자 데이터를 삽입하여 완성된 프롬프트를 생성합니다.
 
@@ -53,8 +54,8 @@ def build_prompt(data: Dict) -> Dict[str, str]:
 
     # 프롬프트 파일 경로 설정
     base_path = Path(__file__).parent.parent / "prompts"
-    system_prompt_path = base_path / SYSTEMPT
-    user_prompt_path = base_path / USERPT
+    system_prompt_path = base_path / PROMT_S
+    user_prompt_path = base_path / PROMT_U
 
     # 프롬프트 파일 읽기
     with open(system_prompt_path, "r", encoding="utf-8") as f:
@@ -75,6 +76,7 @@ def build_prompt(data: Dict) -> Dict[str, str]:
         "{{birthday}}": birthday if birthday else "정보 없음",
         "{{lastContactDate}}": last_contact_date if last_contact_date else "정보 없음",
         "{{interests}}": interests if interests else "정보 없음",
+        "{{chatContent}}": chat_content if chat_content else "정보없음"
     }
 
     # events 포맷팅
@@ -132,7 +134,7 @@ def build_prompt_sllm(data: Dict) -> str:
 
     # 프롬프트 파일 경로 설정
     base_path = Path(__file__).parent.parent / "prompts"
-    prompt_path = base_path / MLLMPT
+    prompt_path = base_path / PROMT_U
 
     # 프롬프트 파일 읽기
     with open(prompt_path, "r", encoding="utf-8") as f:
@@ -170,6 +172,13 @@ def build_prompt_sllm(data: Dict) -> str:
 
     return prompt
 
+
+
+
+
+
+
+
 """
 if __name__ == "__main__":
     print(build_prompt_sllm({
@@ -187,4 +196,4 @@ if __name__ == "__main__":
         }
         ]
     }))
-    """
+"""

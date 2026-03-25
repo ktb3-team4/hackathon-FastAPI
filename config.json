@@ -1,8 +1,9 @@
 {
     "num_predict": 80,
-    "temperature": 0.5,
+    "temperature": 0.6,
     "top_p": 0.85,
-    "top_k": 40,
-    "repeat_penalty": 1.4,
-    "stop": ["입력:", "예시", "---", "\n\n", "안녕하세요", "관계:"]
+    "top_k": 50,
+    "repeat_penalty": 1.25,
+    "frequency_penalty": 0.3,
+    "stop": ["입력:", "출력:", "예시", "---", "관계:"]
 }

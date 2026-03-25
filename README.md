@@ -1,35 +1,21 @@
+### 개요
+기획 목표: 가족/친구에게 자연스러운 안부 메시지를 AI로 생성하여, 사용자가 부담 없이 연락을 재개할 수 있도록 돕는 서비스
 
-## 엔드포인트 목록
-| 메서드 | 엔드포인트 | 설명 |
+
+
+
+### Endpoints
+| Method | Endpoint | Explanation |
 |--------|-----------|------|
-| POST | `/fastapi/jobs` | 새로운 안부 메시지 생성 작업을 생성 |
-| GET | `/fastapi//jobs/{job_id}` | 작업의 현재 상태를 조회 |
-| GET | `/fastapi//jobs/{job_id}/result` | 작업의 결과를 조회 |
+| POST | `/fastapi/jobs` | Create a new message creation task(job) and UUID |
+| GET | `/fastapi//jobs/{job_id}` | Check the current status of the task |
+| GET | `/fastapi//jobs/{job_id}/result` | Check the result of the task |
 
 
+<details>
+<summary><code>/fastapi/jobs</code></summary>                
 
-## 작업 상태 (status)
-
-| 상태 | 설명 |
-|------|------|
-| `PENDING` | 작업이 큐에 대기 중 |
-| `RUNNING` | 워커가 작업을 처리 중 |
-| `DONE` | 작업이 성공적으로 완료됨 |
-| `ERROR` | 작업 처리 중 오류 발생 |
-
-
-
-## Error
-422 Unprocessable Entity
-- 필수 필드 누락
-- 잘못된 데이터 타입
-- Job Not Found
-
-
-
-## /fastapi/jobs
-
-input:
+**Input:**
 ```json
 {
   "name": "홍길동",
@@ -49,7 +35,7 @@ input:
 }
 ```
 
-output:
+**Output:**
 ```json
 {
   "job_id": "string",
@@ -57,12 +43,15 @@ output:
   "result": "string | null"
 }
 ```
+</details>
  
 
-## /fastapi/jobs/{job_id}
+<details>
+<summary><code>/fastapi/jobs/{job_id}</code></summary>
 
-input: none
-output:
+**Input:** None
+
+**Output:**
 ```json
 {
   "job_id": "string",
@@ -70,12 +59,14 @@ output:
   "result": "string | null"
 }
 ```
+</details>
 
+<details>
+<summary><code>/fastapi/jobs/{job_id}/result</code></summary>
 
-## /fastapi/jobs/{job_id}/result
+**Input:** None
 
-input: none
-output:
+**Output:**
 ```json
 {
   "job_id": "string",
@@ -83,11 +74,29 @@ output:
   "result": "string | null"
 }
 ```
+</details>
 
 
 
 
-## test:
+### Status
+| Status | Explanation |
+|------|------|
+| `PENDING` | The task(job) is waiting in the queue. |
+| `RUNNING` | The worker is processing the task. |
+| `DONE` | The task was successfully completed. |
+| `ERROR` | An error occurred during task. |
+
+
+### Error
+422 Unprocessable Entity
+- Required field missing
+- Invalid data type
+- Job Not Found
+
+
+
+### Test:
 ```bash
 curl -X POST "http://localhost:8000/fastapi/jobs" \
   -H "Content-Type: application/json" \
@@ -109,14 +118,9 @@ curl -X POST "http://localhost:8000/fastapi/jobs" \
 }'
 ```
 
-
-
-
 ```bash
 curl "http://localhost:8000/fastapi/jobs/{job_id}"
 ```
-
-
 
 ```bash
 curl "http://localhost:8000/fastapi/jobs/{job_id}/result"

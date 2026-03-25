@@ -1,0 +1,15 @@
+{
+  "name": "상대의 이름",
+  "relationName": "상대와의 관계",
+  "chatStyleName": "상대와 대화 시 내가 사용하는 말투",
+  "age": "상대의 나이(int)",
+  "birthday": "상대의 생일 (yyyy-mm-dd)",
+  "lastContactDate": "yyyy-mm-dd (상대와 마지막으로 연락한 날짜)",
+  "interests": "상대의 취미나 관심사",
+  "events": [
+    {
+      "date": "기념일 날짜 (yyyy-mm-dd)",
+      "description": "기념일 종류"
+    }
+  ],  "chatContent": "실제 연락/대화 내용 기록 (내가 보낸 채팅 내용)"
+}
